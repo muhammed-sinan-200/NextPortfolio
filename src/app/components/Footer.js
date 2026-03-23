@@ -47,23 +47,12 @@ export default function Footer() {
             <div className="pointer-events-none absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-black/[0.03] blur-3xl" />
             <div className="grid gap-14 md:grid-cols-[1.2fr_0.8fr_0.8fr] items-start">
                 <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-gray-400">
-                        Developer Portfolio
-                    </p>
                     <h2 className="mt-5 text-3xl md:text-4xl italic font-extrabold tracking-tight text-black">
                         SinAn.
                     </h2>
                     <p className="mt-5 max-w-sm text-sm md:text-base text-gray-600 leading-relaxed">
-                        I build modern web applications that are fast, reliable, and easy to use, with a strong focus on performance, clean code, and a seamless user experience.                    </p>
-
-                    <motion.button
-                        whileHover={{ x: 4 }}
-                        onClick={() => handleScroll("#contact")}
-                        className="mt-8 inline-flex items-center gap-2 text-sm uppercase tracking-[0.22em] text-gray-700 hover:text-black"
-                    >
-                        Let’s Connect
-                        <ArrowUpRight size={16} />
-                    </motion.button>
+                        I build modern web applications that are fast, reliable, and easy to use, with a strong focus on performance, clean code, and a seamless user experience.
+                    </p>
                 </div>
                 <div>
                     <h3 className="text-sm uppercase tracking-[0.24em] text-gray-400">

@@ -59,7 +59,9 @@ html {
     stroke-dashoffset: 0;
   }
 }
-
+html, body {
+  overflow-x: hidden;
+}
 .flair {
   position: fixed;
   pointer-events: none;

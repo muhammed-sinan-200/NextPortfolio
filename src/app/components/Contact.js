@@ -113,15 +113,15 @@ export default function Contact() {
                 })}
               </div>
               <motion.a
-  href="/MuhammedSinan_Mern_CV.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
-  whileHover={{ y: -2 }}
-  whileTap={{ scale: 0.97 }}
-  className="group mt-5 inline-flex items-center gap-3 px-5 py-3 rounded border border-dashed border-black/20 bg-[#F8F6F1] text-sm font-medium text-black transition duration-300 hover:border-black hover:bg-black hover:text-white"
->
-  View Resume
-</motion.a>
+                href="/MuhammedSinan_Mern_CV.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="group mt-5 inline-flex items-center gap-3 px-5 py-3 rounded border border-dashed border-black/20 bg-[#F8F6F1] text-sm font-medium text-black transition duration-300 hover:border-black hover:bg-black hover:text-white"
+              >
+                View Resume
+              </motion.a>
             </div>
 
             <form className="w-full rounded border border-dashed border-black/20 p-6 md:p-8 bg-[#F8F6F1]">
