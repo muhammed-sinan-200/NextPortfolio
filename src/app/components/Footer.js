@@ -98,7 +98,7 @@ export default function Footer() {
 
             <div className="mt-16 pt-6 border-t border-black/10 flex flex-col md:flex-row items-center justify-center gap-3">
                 <p className="text-sm text-gray-500">
-                    © {new Date().getFullYear()} Muhammed Sinan.All rights reserved.
+                    © Muhammed Sinan {new Date().getFullYear()} .All rights reserved.
                 </p>
 
             </div>

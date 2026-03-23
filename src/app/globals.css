@@ -49,6 +49,9 @@
 html {
   scroll-behavior: smooth;
 }
+* {
+  box-sizing: border-box;
+}
 
 @keyframes drawCircle {
   from {
@@ -61,6 +64,7 @@ html {
 }
 html, body {
   overflow-x: hidden;
+  max-width: 100%;
 }
 .flair {
   position: fixed;

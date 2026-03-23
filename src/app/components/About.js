@@ -66,10 +66,10 @@ const imageReveal = {
 export default function About() {
   return (
     <section
-      id="about"
-      className="min-h-screen flex items-center bg-white scroll-mt-24"
-    >
-      <div className="max-w-7xl mx-auto px-6 w-full">
+  id="about"
+  className="min-h-screen flex items-center bg-white scroll-mt-24 overflow-hidden"
+>
+      <div className="max-w-7xl mx-auto px-6 w-full overflow-hidden">
         <motion.div
           initial="hidden"
           whileInView="show"
