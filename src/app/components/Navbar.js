@@ -10,7 +10,7 @@ const font = Space_Grotesk({
   weight: ["400", "600"],
 });
 
-export default function Navbar() {
+export default function Navbar({ showContent }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -61,8 +61,8 @@ export default function Navbar() {
     >
       <motion.nav
         initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6 }}
+        animate={showContent ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="px-4 sm:px-6 py-3 font-bold text-sm rounded w-full sm:w-[90%] max-w-4xl shadow-lg backdrop-blur-md bg-white/5 border border-black/5"
       >
         <div className="flex justify-between items-center">
@@ -77,11 +77,10 @@ export default function Navbar() {
               <motion.button
                 key={i}
                 onClick={() => handleScroll(i, link.path)}
-                className={`px-6 py-2 rounded transition ${
-                  activeIndex === i
+                className={`px-6 py-2 rounded transition ${activeIndex === i
                     ? "border border-black/30 bg-white/10 cursor-pointer transition-all"
                     : "border border-transparent hover:border-black/10 cursor-pointer"
-                }`}
+                  }`}
               >
                 {link.name}
               </motion.button>
@@ -110,11 +109,10 @@ export default function Navbar() {
                 <button
                   key={i}
                   onClick={() => handleScroll(i, link.path)}
-                  className={`w-full text-left px-4 py-3 rounded transition ${
-                    activeIndex === i
+                  className={`w-full text-left px-4 py-3 rounded transition ${activeIndex === i
                       ? "border border-black/30 bg-white/10"
                       : "border border-transparent hover:border-black/10"
-                  }`}
+                    }`}
                 >
                   {link.name}
                 </button>

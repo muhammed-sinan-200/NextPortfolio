@@ -66,9 +66,9 @@ const imageReveal = {
 export default function About() {
   return (
     <section
-  id="about"
-  className="min-h-screen flex items-center bg-white scroll-mt-24 overflow-hidden"
->
+      id="about"
+      className="min-h-screen flex items-center bg-white scroll-mt-24 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-6 w-full overflow-hidden">
         <motion.div
           initial="hidden"
@@ -118,22 +118,22 @@ export default function About() {
                 </motion.p>
               </motion.div>
 
-             <motion.button
-  variants={fadeUpSlow}
-  whileHover={{ x: 6 }}
-  transition={{ duration: 0.3 }}
-  onClick={() => {
-    document.querySelector("#projects")?.scrollIntoView({
-      behavior: "smooth",
-    });
-  }}
-  className="mt-10 inline-flex items-center gap-3 text-gray-700 cursor-pointer hover:text-black"
->
-  <span className="text-xs uppercase tracking-[0.25em]">
-    View My Work
-  </span>
-  <MoveRight size={16} />
-</motion.button>
+              <motion.button
+                variants={fadeUpSlow}
+                whileHover={{ x: 6 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => {
+                  document.querySelector("#projects")?.scrollIntoView({
+                    behavior: "smooth",
+                  });
+                }}
+                className="mt-10 inline-flex items-center gap-3 text-gray-700 cursor-pointer hover:text-black"
+              >
+                <span className="text-xs uppercase tracking-[0.25em]">
+                  View My Work
+                </span>
+                <MoveRight size={16} />
+              </motion.button>
             </motion.div>
 
             <motion.div

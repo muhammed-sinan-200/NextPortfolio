@@ -1,7 +1,9 @@
 "use client";
-
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import emailjs from "emailjs-com";
+import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -16,29 +18,40 @@ const fadeUp = {
 };
 
 const socialLinks = [
-  {
-    name: "LinkedIn",
-    href: "https://linkedin.com/in/mhd-sinan404",
-    icon: Linkedin,
-  },
-  {
-    name: "GitHub",
-    href: "https://github.com/muhammed-sinan-200",
-    icon: Github,
-  },
-  {
-    name: "Email",
-    href: "mailto:mhdsinanat20@gmail.com",
-    icon: Mail,
-  },
-  {
-    name: "Instagram",
-    href: "https://instagram.com/sinanuuo",
-    icon: Instagram,
-  },
+  { name: "LinkedIn", href: "https://linkedin.com/in/mhd-sinan404", icon: Linkedin },
+  { name: "GitHub", href: "https://github.com/muhammed-sinan-200", icon: Github },
+  { name: "Email", href: "mailto:mhdsinanat20@gmail.com", icon: Mail },
+  { name: "Instagram", href: "https://instagram.com/sinanuuo", icon: Instagram },
 ];
 
 export default function Contact() {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data, e) => {
+    emailjs
+  .sendForm(
+    "service_kf5d8ow",
+    "template_qspc7fk",
+    e.target,
+    "4aKwEsw6XNGFQnPMe"
+  )
+  .then(
+    () => {
+      toast.success("I'll get back to you soon!");
+      reset();
+    },
+    (error) => {
+      console.log(error);
+      toast.error("Please try again.");
+    }
+  );
+  };
+
   return (
     <section
       id="contact"
@@ -112,6 +125,7 @@ export default function Contact() {
                   );
                 })}
               </div>
+
               <motion.a
                 href="/MuhammedSinan_Mern_CV.pdf"
                 target="_blank"
@@ -124,43 +138,63 @@ export default function Contact() {
               </motion.a>
             </div>
 
-            <form className="w-full rounded border border-dashed border-black/20 p-6 md:p-8 bg-[#F8F6F1]">
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="w-full rounded border border-dashed border-black/20 p-6 md:p-8 bg-[#F8F6F1]"
+            >
               <div className="grid gap-5 md:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <input
-                    id="name"
-                    type="text"
+                    {...register("name", { required: true })}
+                    name="name"
                     placeholder="Enter your name"
                     className="h-12 rounded border border-dashed bg-white border-black/20 px-4 text-sm outline-none transition focus:border-black"
                   />
+                  {errors.name && (
+                    <span className="text-xs text-red-500">Name is required</span>
+                  )}
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <input
-                    id="email"
+                    {...register("email", {
+                      required: true,
+                      pattern: /^\S+@\S+$/i,
+                    })}
+                    name="email"
                     type="email"
                     placeholder="Enter your email"
                     className="h-12 rounded border border-dashed bg-white border-black/20 px-4 text-sm outline-none transition focus:border-black"
                   />
+                  {errors.email && (
+                    <span className="text-xs text-red-500">Valid email required</span>
+                  )}
                 </div>
               </div>
 
               <div className="mt-5 flex flex-col gap-2">
                 <input
-                  id="subject"
-                  type="text"
+                  {...register("subject", { required: true })}
+                  name="subject"
                   placeholder="What’s this about?"
                   className="h-12 rounded border border-dashed bg-white border-black/20 px-4 text-sm outline-none transition focus:border-black"
                 />
+                {errors.subject && (
+                  <span className="text-xs text-red-500">Subject is required</span>
+                )}
               </div>
 
               <div className="mt-5 flex flex-col gap-2">
                 <textarea
-                  id="message"
+                  {...register("message", { required: true })}
+                  name="message"
                   rows={6}
                   placeholder="Tell me about your project or idea..."
                   className="resize-none rounded border border-dashed bg-white border-black/20 px-4 py-3 text-sm outline-none transition focus:border-black"
                 />
+                {errors.message && (
+                  <span className="text-xs text-red-500">Message is required</span>
+                )}
               </div>
 
               <motion.button

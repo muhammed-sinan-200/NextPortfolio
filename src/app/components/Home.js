@@ -39,11 +39,11 @@ const fadeUp = {
 
 
 
-export default function Home() {
+export default function Home({ showContent }) {
   const handleScroll = (id) => {
     document.querySelector(id)?.scrollIntoView({
       behavior: "smooth",
-    });
+    }); 
   };
 
   return (
@@ -61,8 +61,7 @@ export default function Home() {
         <motion.div
           variants={container}
           initial="hidden"
-          whileInView="show"
-          viewport={{ once: false, amount: 0.2 }}
+          animate={showContent ? "show" : "hidden"}
         >
           <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
@@ -106,7 +105,7 @@ export default function Home() {
               </motion.p>
 
               <motion.div
-                className="flex gap-2 mt-6"
+                className="flex gap-4 mt-6"
                 variants={fadeUp}
               >
                 <motion.button
@@ -116,7 +115,7 @@ export default function Home() {
                     behavior: "smooth",
                   })
                   }
-                  className="relative overflow-hidden px-5 py-2 text-sm border-b border-gray-900 cursor-pointer
+                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer
       transition-colors duration-300
       before:absolute before:inset-0 before:bg-black
       before:origin-bottom before:scale-y-0
@@ -134,7 +133,7 @@ export default function Home() {
                       behavior: "smooth",
                     })
                   }
-                  className="relative overflow-hidden px-5 py-2 text-sm border-b border-gray-900 cursor-pointer
+                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer
       transition-colors duration-300
       before:absolute before:inset-0 before:bg-black
       before:origin-bottom before:scale-y-0
