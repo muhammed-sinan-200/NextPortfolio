@@ -69,7 +69,7 @@ export default function Home({ showContent }) {
                 variants={fadeUp}
                 className="text-xs uppercase tracking-[0.32em] text-gray-400"
               >
-                Full Stack Engineer
+                Full Stack Developer
               </motion.p>
 
               <motion.h1

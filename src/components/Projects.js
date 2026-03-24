@@ -195,7 +195,7 @@ export default function Projects() {
                 onClick={() => setSelectedProject(project)}
                 className="group cursor-pointer overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_6px_25px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_10px_35px_rgba(0,0,0,0.08)]"
               >
-                <div className="relative h-64 overflow-hidden bg-gray-100">
+                <div className="relative h-48 overflow-hidden bg-gray-100">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -204,7 +204,7 @@ export default function Projects() {
                   <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
                 </div>
 
-                <div className="flex flex-1 flex-col p-6 md:p-7">
+                <div className="flex flex-1 flex-col p-4 md:p-5">
                   <div className="flex flex-col gap-2">
                     <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400">
                       {project.category}

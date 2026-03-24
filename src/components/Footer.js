@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, Instagram, ArrowUpRight } from "lucide-react";
-
+import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 const quickLinks = [
     { name: "Home", href: "#home" },
     { name: "About", href: "#about" },
@@ -32,6 +31,11 @@ const socialLinks = [
         href: "https://instagram.com/sinanuuo",
         icon: Instagram,
     },
+    {
+    name: "WhatsApp",
+    href: "https://wa.me/919526095873",
+    icon: FaWhatsapp,
+  },
 ];
 
 export default function Footer() {

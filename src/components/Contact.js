@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import emailjs from "emailjs-com";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -22,6 +23,11 @@ const socialLinks = [
   { name: "GitHub", href: "https://github.com/muhammed-sinan-200", icon: Github },
   { name: "Email", href: "mailto:mhdsinanat20@gmail.com", icon: Mail },
   { name: "Instagram", href: "https://instagram.com/sinanuuo", icon: Instagram },
+    {
+      name: "WhatsApp",
+      href: "https://wa.me/919526095873",
+      icon: FaWhatsapp,
+    },
 ];
 
 export default function Contact() {
@@ -64,7 +70,6 @@ export default function Contact() {
           variants={fadeUp}
           viewport={{ once: false, amount: 0.2 }}
         >
-          {/* Header */}
           <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
             <div>
               <p className="text-xs uppercase tracking-[0.28em] text-gray-400">
@@ -94,7 +99,6 @@ export default function Contact() {
 
           <div className="mt-12 h-px origin-left bg-gradient-to-r from-black via-gray-400 to-transparent" />
 
-          {/* Content */}
           <div className="mt-14 grid w-full gap-10 lg:grid-cols-[280px_1fr]">
             <div className="space-y-4">
               <p className="text-sm font-medium text-gray-500 uppercase tracking-[0.2em]">

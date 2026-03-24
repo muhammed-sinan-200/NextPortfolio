@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { MoveRight } from "lucide-react";
 
 const container = {
   hidden: {},
@@ -92,7 +91,7 @@ export default function About() {
                 variants={fadeUpSlow}
                 className="text-xs uppercase tracking-[0.28em] text-gray-400 mb-4"
               >
-                Full Stack Engineer · Calicut, Kerala
+                Full Stack Developer · Calicut, Kerala
               </motion.p>
 
               <motion.div
@@ -100,7 +99,7 @@ export default function About() {
                 className="text-gray-600 leading-relaxed space-y-4 text-justify"
               >
                 <motion.p variants={fadeUpSlow}>
-                  Hi, I’m Muhammed Sinan, a Full Stack Engineer based in
+                  Hi, I’m Muhammed Sinan, a Full Stack Developer based in
                   Calicut, Kerala. I build responsive and scalable web
                   applications with a strong focus on usability and performance.
                 </motion.p>
@@ -118,22 +117,22 @@ export default function About() {
                 </motion.p>
               </motion.div>
 
-              <motion.button
-                variants={fadeUpSlow}
-                whileHover={{ x: 6 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => {
-                  document.querySelector("#projects")?.scrollIntoView({
+             <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.96 }}
+                  onClick={() => handleScroll("#projects")?.scrollIntoView({
                     behavior: "smooth",
-                  });
-                }}
-                className="mt-10 inline-flex items-center gap-3 text-gray-700 cursor-pointer hover:text-black"
-              >
-                <span className="text-xs uppercase tracking-[0.25em]">
-                  View My Work
-                </span>
-                <MoveRight size={16} />
-              </motion.button>
+                  })
+                  }
+                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer mt-4
+      transition-colors duration-300
+      before:absolute before:inset-0 before:bg-black
+      before:origin-bottom before:scale-y-0
+      before:transition-transform before:duration-300
+      hover:before:scale-y-100 hover:text-white"
+                >
+                  <span className="relative z-10">View Works</span>
+                </motion.button>
             </motion.div>
 
             <motion.div
