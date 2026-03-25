@@ -43,7 +43,7 @@ export default function Home({ showContent }) {
   const handleScroll = (id) => {
     document.querySelector(id)?.scrollIntoView({
       behavior: "smooth",
-    }); 
+    });
   };
 
   return (
@@ -61,7 +61,8 @@ export default function Home({ showContent }) {
         <motion.div
           variants={container}
           initial="hidden"
-          animate={showContent ? "show" : "hidden"}
+          whileInView="show"
+          viewport={{ once: false, amount: 0.3 }}
         >
           <div className="grid gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
             <div>
@@ -109,38 +110,29 @@ export default function Home({ showContent }) {
                 variants={fadeUp}
               >
                 <motion.button
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => handleScroll("#projects")?.scrollIntoView({
-                    behavior: "smooth",
-                  })
-                  }
-                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer
-      transition-colors duration-300
-      before:absolute before:inset-0 before:bg-black
-      before:origin-bottom before:scale-y-0
-      before:transition-transform before:duration-300
-      hover:before:scale-y-100 hover:text-white"
+                  variants={fadeUp}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => handleScroll("#projects")}
+                  className="group relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer"
                 >
-                  <span className="relative z-10">View Projects</span>
+                  <span className="absolute inset-0 origin-bottom scale-y-0 bg-black transition-transform duration-300 ease-out group-hover:scale-y-100" />
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                    View Projects
+                  </span>
                 </motion.button>
 
                 <motion.button
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() =>
-                    document.querySelector("#contact")?.scrollIntoView({
-                      behavior: "smooth",
-                    })
-                  }
-                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer
-      transition-colors duration-300
-      before:absolute before:inset-0 before:bg-black
-      before:origin-bottom before:scale-y-0
-      before:transition-transform before:duration-300
-      hover:before:scale-y-100 hover:text-white"
+                  variants={fadeUp}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                  onClick={() => handleScroll("#contact")}
+                  className="group relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer"
                 >
-                  <span className="relative z-10">Let's talk</span>
+                  <span className="absolute inset-0 origin-bottom scale-y-0 bg-black transition-transform duration-300 ease-out group-hover:scale-y-100" />
+                  <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                    Let's talk
+                  </span>
                 </motion.button>
               </motion.div>
             </motion.div>

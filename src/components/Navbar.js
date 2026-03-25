@@ -32,28 +32,33 @@ export default function Navbar({ showContent }) {
   };
 
   useEffect(() => {
-    const sections = navLinks.map((link) => document.querySelector(link.path));
+  const sections = navLinks.map((link) => document.querySelector(link.path));
 
-    const onScroll = () => {
-      const scrollPos = window.scrollY + 120;
+  const onScroll = () => {
+    if (window.scrollY < 120) {
+      setActiveIndex(0);
+      return;
+    }
 
-      sections.forEach((section, index) => {
-        if (!section) return;
+    const scrollPos = window.scrollY + window.innerHeight * 0.35;
 
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
+    sections.forEach((section, index) => {
+      if (!section) return;
 
-        if (scrollPos >= top && scrollPos < top + height) {
-          setActiveIndex(index);
-        }
-      });
-    };
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
 
-    window.addEventListener("scroll", onScroll);
-    onScroll();
+      if (scrollPos >= top && scrollPos < top + height) {
+        setActiveIndex(index);
+      }
+    });
+  };
 
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  window.addEventListener("scroll", onScroll);
+  onScroll();
+
+  return () => window.removeEventListener("scroll", onScroll);
+}, []);
 
   return (
     <div

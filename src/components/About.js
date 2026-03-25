@@ -117,22 +117,24 @@ export default function About() {
                 </motion.p>
               </motion.div>
 
-             <motion.button
-                  whileHover={{ y: -2 }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => handleScroll("#projects")?.scrollIntoView({
+              <motion.button
+                variants={fadeUpSlow}
+                whileHover={{ y: -3 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={() =>
+                  document.querySelector("#projects")?.scrollIntoView({
                     behavior: "smooth",
                   })
-                  }
-                  className="relative overflow-hidden px-5 py-2 text-sm border border-dashed border-gray-900 cursor-pointer mt-4
-      transition-colors duration-300
-      before:absolute before:inset-0 before:bg-black
-      before:origin-bottom before:scale-y-0
-      before:transition-transform before:duration-300
-      hover:before:scale-y-100 hover:text-white"
-                >
-                  <span className="relative z-10">View Works</span>
-                </motion.button>
+                }
+                className="group relative mt-6 overflow-hidden px-4 py-2 text-sm uppercase tracking-[0.18em] border border-dashed border-gray-900 text-gray-900 cursor-pointer"
+              >
+                <span
+                  className="absolute inset-0 origin-bottom scale-y-0 bg-black transition-transform duration-300 ease-out group-hover:scale-y-100"
+                />
+                <span className="relative z-10 transition-colors duration-300 group-hover:text-white">
+                  View Works
+                </span>
+              </motion.button>
             </motion.div>
 
             <motion.div

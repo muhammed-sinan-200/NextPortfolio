@@ -2,23 +2,25 @@
 
 import { motion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
+import Image from "next/image";
 
 const skills = [
-  { name: "HTML" },
-  { name: "CSS" },
-  { name: "JavaScript" },
-  { name: "React" },
-  { name: "Next.js" },
-  { name: "Tailwind" },
-  { name: "Bootstrap" },
-  { name: "Node.js" },
-  { name: "Express.js" },
-  { name: "MongoDB" },
-  { name: "Postman" },
-  { name: "Git" },
-  { name: "Figma" },
-  { name: "Cloudinary" },
-  { name: "Vercel" },
+  { name: "HTML", icon: "/icons/html.svg" },
+  { name: "CSS", icon: "/icons/css.svg" },
+  { name: "JavaScript", icon: "/icons/js.svg" },
+  { name: "React", icon: "/icons/react.svg" },
+  { name: "Next.js", icon: "/icons/nextjs.svg" },
+  { name: "Tailwind", icon: "/icons/tailwind.svg" },
+  { name: "Bootstrap", icon: "/icons/Bootstrap.svg" },
+  { name: "Node.js", icon: "/icons/node.svg" },
+  { name: "Express.js", icon: "/icons/Express.svg" },
+  { name: "MongoDB", icon: "/icons/MongoDB.svg" },
+  { name: "Postman", icon: "/icons/Postman.svg" },
+  { name: "Git", icon: "/icons/Git.svg" },
+  { name: "GitHub", icon: "/icons/GitHub.svg" },
+  { name: "Figma", icon: "/icons/Figma.svg" },
+  { name: "Cloudinary", icon: "/icons/cloudinary.svg" },
+  { name: "Vercel", icon: "/icons/Vercel.svg" },
 ];
 
 const container = {
@@ -68,13 +70,21 @@ const chipReveal = {
   },
 };
 
-function SkillCard({ skill }) {
+function SkillCard({ skill, icon }) {
   return (
     <motion.div
       variants={chipReveal}
       whileHover={{ y: -4, scale: 1.02 }}
-      className="inline-flex h-[68px] min-w-[110px] items-center justify-center rounded-[1.2rem] border border-dashed border-black/20 bg-white px-5 text-sm text-gray-700 transition duration-300 hover:border-black hover:text-black"
+      className="group flex items-center gap-3 h-[68px] min-w-[120px] justify-center rounded border border-dashed border-black/20 bg-white px-5 text-sm text-gray-700 transition duration-300 hover:border-black hover:text-black"
     >
+      <Image
+        src={icon}
+        alt={skill}
+        width={38}
+        height={38}
+        className="object-contain"
+      />
+
       <span className="font-medium tracking-tight">{skill}</span>
     </motion.div>
   );
@@ -113,9 +123,9 @@ export default function Skills() {
               >
                 Skills
                 <br />
-                That Shape
+                Behind
                 <br />
-                Products
+                My Work
               </motion.h2>
             </div>
 
@@ -124,13 +134,6 @@ export default function Skills() {
                 I focus on building products with a balanced mix of interface
                 quality, backend reliability, and smooth development workflow.
               </p>
-
-              <div className="mt-8 flex items-center gap-3 text-gray-700">
-                <span className="text-xs uppercase tracking-[0.28em]">
-                  Scroll to explore
-                </span>
-                <ArrowDown size={16} />
-              </div>
             </motion.div>
           </div>
 
@@ -144,7 +147,11 @@ export default function Skills() {
             className="mt-14 flex flex-wrap justify-center gap-3 md:gap-4"
           >
             {skills.map((skill) => (
-              <SkillCard key={skill.name} skill={skill.name} />
+              <SkillCard
+                key={skill.name}
+                skill={skill.name}
+                icon={skill.icon}
+              />
             ))}
           </motion.div>
         </motion.div>

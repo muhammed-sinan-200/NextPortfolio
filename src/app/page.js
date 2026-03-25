@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <>
-      <Home showContent={showContent} />
+      <Home key={showContent ? "visible" : "hidden"} showContent={showContent} />
       <About />
       <Skills />
       <Projects />
