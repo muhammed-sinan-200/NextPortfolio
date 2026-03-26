@@ -51,7 +51,7 @@ export default function Footer() {
             <div className="pointer-events-none absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-black/[0.03] blur-3xl" />
             <div className="grid gap-14 md:grid-cols-[1.2fr_0.8fr_0.8fr] items-start">
                 <div>
-                    <h2 className="mt-5 text-3xl md:text-4xl italic font-extrabold tracking-tight text-black">
+                    <h2 className="mt-5 text-3xl md:text-4xl italic font-bold tracking-tight text-black">
                         SinAn.
                     </h2>
                     <p className="mt-5 max-w-sm text-sm md:text-base text-gray-600 leading-relaxed">

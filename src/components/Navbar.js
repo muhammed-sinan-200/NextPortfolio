@@ -2,7 +2,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Space_Grotesk } from "next/font/google";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
 import { raleway } from "../fonts";
 
 const font = Space_Grotesk({
@@ -32,33 +31,33 @@ export default function Navbar({ showContent }) {
   };
 
   useEffect(() => {
-  const sections = navLinks.map((link) => document.querySelector(link.path));
+    const sections = navLinks.map((link) => document.querySelector(link.path));
 
-  const onScroll = () => {
-    if (window.scrollY < 120) {
-      setActiveIndex(0);
-      return;
-    }
-
-    const scrollPos = window.scrollY + window.innerHeight * 0.35;
-
-    sections.forEach((section, index) => {
-      if (!section) return;
-
-      const top = section.offsetTop;
-      const height = section.offsetHeight;
-
-      if (scrollPos >= top && scrollPos < top + height) {
-        setActiveIndex(index);
+    const onScroll = () => {
+      if (window.scrollY < 120) {
+        setActiveIndex(0);
+        return;
       }
-    });
-  };
 
-  window.addEventListener("scroll", onScroll);
-  onScroll();
+      const scrollPos = window.scrollY + window.innerHeight * 0.35;
 
-  return () => window.removeEventListener("scroll", onScroll);
-}, []);
+      sections.forEach((section, index) => {
+        if (!section) return;
+
+        const top = section.offsetTop;
+        const height = section.offsetHeight;
+
+        if (scrollPos >= top && scrollPos < top + height) {
+          setActiveIndex(index);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll);
+    onScroll();
+
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <div
@@ -68,23 +67,23 @@ export default function Navbar({ showContent }) {
         initial={{ y: -80, opacity: 0 }}
         animate={showContent ? { y: 0, opacity: 1 } : { y: -80, opacity: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="px-4 sm:px-6 py-3 font-bold text-sm rounded w-full sm:w-[90%] max-w-4xl shadow-lg backdrop-blur-md bg-white/5 border border-black/5"
-      >
+        className="px-4 sm:px-6 py-3 text-sm rounded-2xl w-full sm:w-[90%] max-w-4xl backdrop-blur-md bg-white/70 border border-black/10 shadow-sm"      >
         <div className="flex justify-between items-center">
           <motion.div
-            className={`${raleway.className} italic rounded-full px-2 sm:px-4 py-2 text-xl sm:text-2xl`}
+            onClick={() => handleScroll(0, "#home")}
+            className={`${raleway.className} font-bold italic rounded-full px-2 sm:px-4 py-2 text-xl sm:text-2xl cursor-pointer`}
           >
             <h1>SinAn.</h1>
           </motion.div>
 
-          <motion.div className="hidden md:flex gap-2 p-1 rounded">
+          <motion.div className="hidden md:flex gap-6 p-1 rounded">
             {navLinks.map((link, i) => (
               <motion.button
                 key={i}
                 onClick={() => handleScroll(i, link.path)}
-                className={`px-6 py-2 rounded transition ${activeIndex === i
-                    ? "border border-black/30 bg-white/10 cursor-pointer transition-all"
-                    : "border border-transparent hover:border-black/10 cursor-pointer"
+                className={`px-6 py-2 rounded-full transition ${activeIndex === i
+                  ? "border border-black/30 bg-[#fffefb] text-black  cursor-pointer transition-all"
+                  : "border border-transparent hover:border-black/10 hover:border-dashed cursor-pointer"
                   }`}
               >
                 {link.name}
@@ -94,13 +93,23 @@ export default function Navbar({ showContent }) {
 
           <button
             onClick={() => setMenuOpen((prev) => !prev)}
-            className="md:hidden flex items-center justify-center rounded p-2 border border-black/10"
+            className="md:hidden relative flex h-10 w-10 items-center justify-center"
             aria-label="Toggle menu"
           >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
+            <span
+              className={`absolute block h-[1.4px] w-6 bg-black transition-all duration-300 ease-out ${menuOpen ? "rotate-45" : "-translate-y-2"
+                }`}
+            />
+            <span
+              className={`absolute block h-[1.4px] w-6 bg-black transition-all duration-300 ease-out ${menuOpen ? "opacity-0" : "opacity-100"
+                }`}
+            />
+            <span
+              className={`absolute block h-[1.4px] w-6 bg-black transition-all duration-300 ease-out ${menuOpen ? "-rotate-45" : "translate-y-2"
+                }`}
+            />
           </button>
         </div>
-
         <AnimatePresence>
           {menuOpen && (
             <motion.div
@@ -108,19 +117,20 @@ export default function Navbar({ showContent }) {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.25 }}
-              className="md:hidden mt-3 flex flex-col gap-2 p-2"
+              className="md:hidden mt-6 flex flex-col gap-2 px-4 pb-4 items-start"
             >
               {navLinks.map((link, i) => (
-                <button
+                <motion.button
                   key={i}
                   onClick={() => handleScroll(i, link.path)}
-                  className={`w-full text-left px-4 py-3 rounded transition ${activeIndex === i
-                      ? "border border-black/30 bg-white/10"
-                      : "border border-transparent hover:border-black/10"
+                  whileTap={{ scale: 0.96 }}
+                  className={`text-4xl font-medium tracking-tighter transition ${activeIndex === i
+                    ? "opacity-100"
+                    : "opacity-50 hover:opacity-80"
                     }`}
                 >
                   {link.name}
-                </button>
+                </motion.button>
               ))}
             </motion.div>
           )}

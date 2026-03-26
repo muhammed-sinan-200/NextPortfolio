@@ -5,16 +5,16 @@ import { ArrowDown } from "lucide-react";
 import Image from "next/image";
 
 const skills = [
-  { name: "HTML", icon: "/icons/html.svg" },
-  { name: "CSS", icon: "/icons/css.svg" },
-  { name: "JavaScript", icon: "/icons/js.svg" },
   { name: "React", icon: "/icons/react.svg" },
-  { name: "Next.js", icon: "/icons/nextjs.svg" },
-  { name: "Tailwind", icon: "/icons/tailwind.svg" },
-  { name: "Bootstrap", icon: "/icons/Bootstrap.svg" },
+  { name: "JavaScript", icon: "/icons/js.svg" },
   { name: "Node.js", icon: "/icons/node.svg" },
   { name: "Express.js", icon: "/icons/Express.svg" },
+  { name: "Next.js", icon: "/icons/nextjs.svg" },
   { name: "MongoDB", icon: "/icons/MongoDB.svg" },
+  { name: "Tailwind", icon: "/icons/tailwind.svg" },
+  { name: "HTML", icon: "/icons/html.svg" },
+  { name: "CSS", icon: "/icons/css.svg" },
+  { name: "Bootstrap", icon: "/icons/Bootstrap.svg" },
   { name: "Postman", icon: "/icons/Postman.svg" },
   { name: "Git", icon: "/icons/Git.svg" },
   { name: "GitHub", icon: "/icons/GitHub.svg" },
@@ -75,8 +75,7 @@ function SkillCard({ skill, icon }) {
     <motion.div
       variants={chipReveal}
       whileHover={{ y: -4, scale: 1.02 }}
-      className="group flex items-center gap-3 h-[68px] min-w-[120px] justify-center rounded border border-dashed border-black/20 bg-white px-5 text-sm text-gray-700 transition duration-300 hover:border-black hover:text-black"
-    >
+      className="group flex h-[68px] w-full items-center justify-center gap-3 rounded border border-dashed border-black/20 bg-white px-4 text-sm text-gray-700 transition duration-300 hover:border-black hover:text-black"    >
       <Image
         src={icon}
         alt={skill}
@@ -144,7 +143,7 @@ export default function Skills() {
 
           <motion.div
             variants={container}
-            className="mt-14 flex flex-wrap justify-center gap-3 md:gap-4"
+            className="mt-14 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4 lg:grid-cols-4"
           >
             {skills.map((skill) => (
               <SkillCard
