@@ -36,7 +36,7 @@ const projects = [
       "SneakerHub is a shopping app built with React, featuring product listing, cart functionality, and state management using Context API.",
     tech: ["React", "Context API", "React Bootstrap"],
     image: "/sneeker.png",
-    live: "https://sneekerehub-argf.vercel.app/",
+    live: "https://sneekerehub.vercel.app/",
     github: "https://github.com/muhammed-sinan-200/sneekerehub",
   },
   {

@@ -131,7 +131,7 @@ export default function Contact() {
               </div>
 
               <motion.a
-                href="/MuhammedSinan_Mern_CV.pdf"
+                href="/Muhammed_Sinan_MERN-Developer.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ y: -2 }}
