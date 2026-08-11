@@ -73,7 +73,7 @@ export default function Navbar({ showContent }) {
             onClick={() => handleScroll(0, "#home")}
             className={`${raleway.className} font-bold italic rounded-full px-2 sm:px-4 py-2 text-xl sm:text-2xl cursor-pointer`}
           >
-            <h1>SinAn.</h1>
+            <span>SinAn.</span>
           </motion.div>
 
           <motion.div className="hidden md:flex gap-6 p-1 rounded">

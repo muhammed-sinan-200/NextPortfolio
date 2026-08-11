@@ -1,8 +1,8 @@
 "use client";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Instagram } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
-import emailjs from "emailjs-com";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
@@ -31,6 +31,7 @@ const socialLinks = [
 ];
 
 export default function Contact() {
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
@@ -38,24 +39,33 @@ export default function Contact() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data, e) => {
-    emailjs
-  .sendForm(
-    "service_kf5d8ow",
-    "template_qspc7fk",
-    e.target,
-    "4aKwEsw6XNGFQnPMe"
-  )
-  .then(
-    () => {
+  const onSubmit = async (data) => {
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok || !result.ok) {
+        toast.error("Please try again.");
+        return;
+      }
+
       toast.success("I'll get back to you soon!");
       reset();
-    },
-    (error) => {
+    } catch (error) {
       console.log(error);
       toast.error("Please try again.");
+    } finally {
+      setIsSubmitting(false);
     }
-  );
   };
 
   return (
@@ -146,6 +156,22 @@ export default function Contact() {
               onSubmit={handleSubmit(onSubmit)}
               className="w-full rounded border border-dashed border-black/20 p-6 md:p-8 bg-[#F8F6F1]"
             >
+              {/* Honeypot — hidden from users; bots that auto-fill forms will populate it */}
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] h-0 w-0 overflow-hidden opacity-0"
+              >
+                <label htmlFor="website">Website</label>
+                <input
+                  {...register("website")}
+                  id="website"
+                  name="website"
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
+
               <div className="grid gap-5 md:grid-cols-2">
                 <div className="flex flex-col gap-2">
                   <input
@@ -203,15 +229,19 @@ export default function Contact() {
 
               <motion.button
                 type="submit"
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
+                disabled={isSubmitting}
+                whileHover={isSubmitting ? undefined : { y: -2 }}
+                whileTap={isSubmitting ? undefined : { scale: 0.97 }}
                 className="relative overflow-hidden mt-6 px-6 py-3 text-sm bg-white border border-dashed border-black/20 rounded cursor-pointer
                 before:absolute before:inset-0 before:bg-black
                 before:origin-bottom before:scale-y-0
                 before:transition-transform before:duration-300
-                hover:before:scale-y-100 hover:text-white"
+                hover:before:scale-y-100 hover:text-white
+                disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-60"
               >
-                <span className="relative z-10">Send Message</span>
+                <span className="relative z-10">
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </span>
               </motion.button>
             </form>
           </div>

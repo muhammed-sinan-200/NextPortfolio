@@ -14,7 +14,7 @@ export default function IntroLoader({ isLoading }) {
                     className="fixed inset-0 z-[9999] overflow-hidden bg-black"
                 >
                     <div className="relative flex h-full w-full items-center justify-center">
-                        <motion.h1
+                        <motion.p
                             initial={{
                                 opacity: 0,
                                 scale: 0.82,
@@ -35,7 +35,7 @@ export default function IntroLoader({ isLoading }) {
                             className={`${raleway.className} relative z-10 text-5xl font-bold italic tracking-tight text-[#E9DFC8] sm:text-6xl md:text-7xl`}
                         >
                             SinAn.
-                        </motion.h1>
+                        </motion.p>
                     </div>
                 </motion.div>
             )}

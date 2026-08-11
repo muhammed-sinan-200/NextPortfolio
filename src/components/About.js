@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const container = {
@@ -142,15 +143,21 @@ export default function About() {
               className="flex justify-center md:justify-end"
             >
               <div className="w-full max-w-sm h-[480px] rounded-3xl border-2 border-dashed border-gray-200 flex items-center justify-center relative overflow-hidden">
-                <motion.img
-                  src="/my-gibli3.png"
-                  alt="Muhammed Sinan"
-                  className="w-full h-full object-cover z-10"
+                <motion.div
+                  className="absolute inset-0 z-10"
                   initial={{ scale: 1.06 }}
                   whileInView={{ scale: 1 }}
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                   viewport={{ once: false, amount: 0.3 }}
-                />
+                >
+                  <Image
+                    src="/my-gibli3.png"
+                    alt="Muhammed Sinan"
+                    fill
+                    sizes="(max-width: 768px) 92vw, 384px"
+                    className="object-cover"
+                  />
+                </motion.div>
               </div>
             </motion.div>
           </div>

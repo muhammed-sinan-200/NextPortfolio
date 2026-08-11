@@ -4,64 +4,7 @@ import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import { raleway } from "../fonts";
-
-const projects = [
-  {
-    id: 1,
-    title: "Mediflow",
-    category: "Full Stack Project",
-    fullDescription:
-      "Mediflow is a full stack web application focused on smooth user experience, scalable architecture, and reliable backend functionality.",
-    tech: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
-    image: "/mediflow.png",
-    live: "https://mediflow-user.vercel.app/",
-    github: "https://github.com/muhammed-sinan-200/MediFlow",
-  },
-  {
-    id: 2,
-    title: "Aiman Holidays",
-    category: "Frontend Freelance Project",
-    fullDescription:
-      "Aiman Holidays is a frontend website developed for a travel agency client to present their business online in a clean and professional way. Focused on clean design, responsive layout, and smooth user experience.",
-    tech: ["React", "Tailwind CSS", "Framer Motion"],
-    image: "/travels.png",
-    live: "https://aiman-holidays.vercel.app/",
-    github: null,
-  },
-  {
-    id: 3,
-    title: "Sneaker Hub",
-    category: "Frontend React Project",
-    fullDescription:
-      "SneakerHub is a shopping app built with React, featuring product listing, cart functionality, and state management using Context API.",
-    tech: ["React", "Context API", "React Bootstrap"],
-    image: "/sneeker.png",
-    live: "https://sneekerehub.vercel.app/",
-    github: "https://github.com/muhammed-sinan-200/sneekerehub",
-  },
-  {
-    id: 4,
-    title: "Developer Portfolio",
-    category: "Frontend Next.js Project",
-    fullDescription:
-      "A personal portfolio website built to showcase my projects, skills, and development work through a clean and interactive user interface.",
-    tech: ["Next.js", "Tailwind CSS", "Framer Motion"],
-    image: "/portfolio.png",
-    live: null,
-    github: null,
-  },
-  {
-    id: 5,
-    title: "Resumy",
-    category: "Full Stack AI Project",
-    fullDescription:
-      "A full stack resume review web app where users upload their resume PDF and receive instant AI-based feedback to improve content and overall quality.",
-    tech: ["React", "Node.js", "Express.js", "MongoDB", "Google Gemini API"],
-    image: "/resumy.png",
-    live: "https://resumy-kappa.vercel.app",
-    github: "https://github.com/muhammed-sinan-200/Resumy",
-  },
-];
+import { projects } from "../data/projects";
 
 const titleFromLeft = {
   hidden: { opacity: 0, x: -70 },
@@ -197,7 +140,7 @@ export default function Projects() {
               >
                 <div className="relative h-48 overflow-hidden bg-gray-100">
                   <img
-                    src={project.image}
+                    src={project.images[0]}
                     alt={project.title}
                     className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                   />
@@ -239,7 +182,7 @@ export default function Projects() {
         {selectedProject && (
           <>
             <motion.div
-              className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-black/55 backdrop-blur-[6px]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -247,87 +190,83 @@ export default function Projects() {
             />
 
             <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8"
+              className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 md:p-8"
               initial={{ opacity: 0, scale: 0.96, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 20 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div
-                className="relative w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-2xl"
+                className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[1.75rem] border border-black/8 bg-[#FCFAF5] shadow-[0_25px_80px_rgba(0,0,0,0.22)] md:flex-row"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
                   onClick={() => setSelectedProject(null)}
-                  className="absolute right-4 top-4 z-20 rounded-full border border-gray-200 bg-white/90 p-2 text-gray-700 backdrop-blur-md transition hover:bg-gray-100"
+                  aria-label="Close project details"
+                  className="absolute right-3 top-3 z-20 rounded-full border border-black/10 bg-white/90 p-2.5 text-gray-700 shadow-sm backdrop-blur-md transition hover:border-black/20 hover:bg-white hover:text-black sm:right-4 sm:top-4"
                 >
-                  <X size={20} />
+                  <X size={18} />
                 </button>
 
-                <div className="grid md:grid-cols-2">
-                  <div className="h-72 bg-gray-100 md:h-full">
+                <div className="relative flex shrink-0 items-center justify-center overflow-hidden border-b border-black/5 bg-gradient-to-br from-[#F3EFE4] via-[#F8F6F1] to-[#EDE8D5] p-4 sm:p-5 md:w-[54%] md:border-b-0 md:border-r md:p-7">
+                  <div className="pointer-events-none absolute -left-10 top-8 h-40 w-40 rounded-full bg-white/50 blur-3xl" />
+                  <div className="pointer-events-none absolute -right-8 bottom-6 h-36 w-36 rounded-full bg-[#E8E0CF]/70 blur-3xl" />
+
+                  <div className="relative w-full overflow-hidden rounded-2xl border border-black/6 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
                     <img
-                      src={selectedProject.image}
+                      src={selectedProject.images[0]}
                       alt={selectedProject.title}
-                      className="h-full w-full object-cover"
+                      className="mx-auto block h-auto max-h-[38vh] w-full object-contain object-top md:max-h-[78vh]"
                     />
                   </div>
+                </div>
 
-                  <div className="max-h-[85vh] overflow-y-auto p-8 md:p-10">
-                    <p className="text-xs uppercase tracking-[0.3em] text-gray-400">
+                <div className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-white px-7 py-8 sm:px-9 sm:py-10 md:px-10 md:py-12">
+                  <div className="flex-1">
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-gray-400">
                       {selectedProject.category}
                     </p>
 
-                    <h3 className="mt-3 text-xl font-bold tracking-tight text-black md:text-3xl">
+                    <h3
+                      className={`${raleway.className} mt-4 text-3xl font-extrabold italic tracking-tight text-black sm:text-4xl`}
+                    >
                       {selectedProject.title}
                     </h3>
 
-                    <p className="mt-3 text-sm leading-7 text-justify text-gray-600 md:text-base">
+                    <div className="mt-6 h-px w-12 bg-black/20" />
+
+                    <p className="mt-6 max-w-md text-sm leading-7 text-gray-600 sm:text-[15px] sm:leading-8">
                       {selectedProject.fullDescription}
                     </p>
+                  </div>
 
-                    <div className="mt-8">
-                      <h4 className="text-sm uppercase tracking-[0.24em] text-gray-400">
-                        Tech Stack
-                      </h4>
+                  <div className="mt-10 flex flex-wrap gap-3 border-t border-black/6 pt-8">
+                    {selectedProject.live && (
+                      <a
+                        href={selectedProject.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition duration-300 hover:scale-[1.02]"
+                      >
+                        <span>Live Preview</span>
+                        <ArrowUpRight
+                          size={16}
+                          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        />
+                      </a>
+                    )}
 
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {selectedProject.tech.map((item) => (
-                          <span
-                            key={item}
-                            className="rounded-full border border-gray-200 px-3 py-1.5 text-xs text-gray-700"
-                          >
-                            {item}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-10 flex flex-wrap gap-3">
-                      {selectedProject.live && (
-                        <a
-                          href={selectedProject.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full bg-black px-5 py-3 text-sm font-medium text-white transition hover:scale-[1.02]"
-                        >
-                          Live Preview
-                          <ArrowUpRight size={16} />
-                        </a>
-                      )}
-
-                      {selectedProject.github && (
-                        <a
-                          href={selectedProject.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-5 py-3 text-sm font-medium text-gray-800 transition hover:bg-gray-50"
-                        >
-                          GitHub
-                          <Github size={16} />
-                        </a>
-                      )}
-                    </div>
+                    {selectedProject.github && (
+                      <a
+                        href={selectedProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-[#FCFAF5] px-6 py-3 text-sm font-medium text-gray-800 transition duration-300 hover:border-black hover:bg-black hover:text-white"
+                      >
+                        <Github size={16} />
+                        <span>GitHub</span>
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
