@@ -1,21 +1,18 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
 import ClientWrapper from "../components/ClientWrapper";
+import { pixelify, raleway } from "../fonts";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  adjustFontFallback: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const siteUrl = "https://sinaan.netlify.app";
 
-// TODO: Replace with your real production domain (e.g. https://your-site.vercel.app)
-const siteUrl = "https://REPLACE_WITH_YOUR_PRODUCTION_URL";
 
-// Social preview image (1200×630) at public/og-image.png
 const ogImagePath = "/og-image.png";
 
 export const metadata = {
@@ -85,8 +82,6 @@ export const metadata = {
     description:
       "Full Stack Developer based in Calicut, Kerala. Building clean, scalable web applications with the MERN stack and Next.js.",
     images: [ogImagePath],
-    // TODO: Optional — replace with your X/Twitter handle, e.g. "@yourhandle"
-    // creator: "@REPLACE_WITH_TWITTER_HANDLE",
   },
 };
 
@@ -94,7 +89,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistSans.className} ${raleway.variable} ${pixelify.variable} antialiased`}
       >
         <ClientWrapper>
           {children}

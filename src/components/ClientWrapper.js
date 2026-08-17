@@ -1,21 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Navbar from "./Navbar";
-import IntroLoader from "./IntroLoader";
 import { Toaster } from "react-hot-toast";
 
 export default function ClientWrapper({ children }) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1550);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <>
       <Toaster
@@ -31,8 +19,7 @@ export default function ClientWrapper({ children }) {
         }}
       />
 
-      <IntroLoader isLoading={isLoading} />
-      <Navbar showContent={!isLoading} />
+      <Navbar />
 
       {children}
     </>

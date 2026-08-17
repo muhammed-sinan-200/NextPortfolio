@@ -1,14 +1,11 @@
 @import "tailwindcss";
 
-@plugin "tailwindcss-animate";
-
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,30 +45,57 @@
 }
 html {
   scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+@keyframes intro-nav {
+  from {
+    transform: translateY(-12px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes intro-fade {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.intro-nav {
+  animation: intro-nav 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-fade {
+  animation: intro-fade 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.intro-fade-delay-1 {
+  animation-delay: 0.08s;
+}
+
+.intro-fade-delay-2 {
+  animation-delay: 0.16s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-nav,
+  .intro-fade {
+    animation: none;
+  }
 }
 * {
   box-sizing: border-box;
 }
-
-@keyframes drawCircle {
-  from {
-    stroke-dasharray: 400;
-    stroke-dashoffset: 400;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
 html, body {
   overflow-x: hidden;
   max-width: 100%;
-}
-.flair {
-  position: fixed;
-  pointer-events: none;
-  width: 15px;
-  height: 15px;
-  opacity: 0;
 }
 
 :root {

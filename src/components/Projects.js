@@ -3,16 +3,27 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Github, X } from "lucide-react";
-import { raleway } from "../fonts";
+import Image from "next/image";
+import { pixelify } from "../fonts";
 import { projects } from "../data/projects";
+import SplitTextHover, { useRollingHover } from "./SplitTextHover";
+
+const sectionReveal = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const titleFromLeft = {
-  hidden: { opacity: 0, x: -70 },
+  hidden: { opacity: 0, x: -30 },
   show: {
     opacity: 1,
     x: 0,
     transition: {
-      duration: 1.5,
+      duration: 0.8,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -24,7 +35,7 @@ const fadeUp = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.85,
+      duration: 0.6,
       ease: [0.22, 1, 0.36, 1],
     },
   },
@@ -34,8 +45,7 @@ const cardsContainer = {
   hidden: {},
   show: {
     transition: {
-      staggerChildren: 0.14,
-      delayChildren: 0.1,
+      staggerChildren: 0.09,
     },
   },
 };
@@ -46,14 +56,82 @@ const cardReveal = {
     opacity: 1,
     y: 0,
     transition: {
-      duration: 0.75,
+      duration: 0.5,
       ease: [0.22, 1, 0.36, 1],
     },
   },
 };
 
+const pixel3dStyle = {
+  color: "#B9FF66",
+  WebkitTextStroke: "0.07em #111111",
+  paintOrder: "stroke fill",
+  textShadow:
+    "0.05em 0.05em 0 #4A7A12, 0.09em 0.09em 0 #4A7A12, 0.13em 0.13em 0 #111111",
+};
+
+const ctaClass =
+  "inline-flex items-center gap-2 border-2 border-gray-900 bg-[#B9FF66] px-5 py-2 text-sm uppercase tracking-[0.18em] text-gray-900 shadow-[3px_3px_0_0_#111] transition-[transform,box-shadow] duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_#111]";
+
+function ProjectCard({ project, index, variants, onSelect }) {
+  const { active, hoverProps } = useRollingHover();
+
+  return (
+    <motion.article
+      variants={variants}
+      onClick={() => onSelect(project)}
+      {...hoverProps}
+      className="group cursor-pointer overflow-hidden border-2 border-gray-900 bg-white shadow-[3px_3px_0_0_#111] transition-[transform,box-shadow] duration-150 hover:-translate-y-0.5 hover:shadow-[4px_4px_0_0_#111]"
+    >
+      <div className="relative h-48 overflow-hidden border-b-2 border-gray-900 bg-white">
+        <Image
+          src={project.images[0]}
+          alt={project.title}
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+        />
+        <span
+          className="absolute top-2 left-2 h-2 w-2 bg-[#B9FF66]"
+          aria-hidden="true"
+        />
+      </div>
+
+      <div className="flex flex-1 flex-col p-4 md:p-5">
+        <div className="flex flex-col gap-2">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400">
+            {project.category}
+          </p>
+
+          <div className="flex items-center justify-between gap-4">
+            <h3 className="text-2xl font-semibold tracking-tight text-black">
+              {project.title}
+            </h3>
+
+            <span className="shrink-0 bg-[#B9FF66] px-1.5 py-0.5 text-xs uppercase tracking-[0.24em] text-gray-900">
+              0{index + 1}
+            </span>
+          </div>
+        </div>
+
+        <div className="mt-6 inline-flex items-center gap-2 self-start border-2 border-gray-900 bg-[#B9FF66] px-3 py-1.5 text-xs uppercase tracking-[0.18em] text-gray-900 shadow-[2px_2px_0_0_#111] transition-[transform,box-shadow] duration-150 group-hover:translate-x-[1px] group-hover:translate-y-[1px] group-hover:shadow-[1px_1px_0_0_#111]">
+          <SplitTextHover unit active={active}>
+            View Project
+          </SplitTextHover>
+          <ArrowUpRight
+            size={14}
+            className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+          />
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const livePreviewRoll = useRollingHover();
+  const githubRoll = useRollingHover();
 
   useEffect(() => {
     const handleEscape = (e) => {
@@ -79,52 +157,69 @@ export default function Projects() {
   return (
     <section
       id="projects"
-      className="min-h-screen relative bg-[#FCFAF5] px-6 py-24 md:px-10 lg:px-20"
+      className="relative min-h-screen overflow-hidden bg-white px-6 py-24 md:px-10 lg:px-20"
     >
-<div className="pointer-events-none absolute top-0 left-0 h-24 w-full bg-gradient-to-b from-white to-transparent" />
-  <div className="pointer-events-none absolute bottom-0 left-0 h-24 w-full bg-gradient-to-t from-white to-transparent" />      <div className="mx-auto max-w-7xl">
+      <div
+        className="pointer-events-none absolute inset-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <span className="absolute top-16 left-4 h-3 w-3 bg-[#B9FF66] sm:left-8" />
+        <span className="absolute top-16 left-8 h-2 w-2 bg-gray-900 sm:left-12" />
+        <span className="absolute top-16 right-4 h-3 w-3 bg-[#B9FF66] sm:right-8" />
+        <span className="absolute top-16 right-8 h-2 w-2 bg-gray-900 sm:right-12" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl">
         <motion.div
+          variants={sectionReveal}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: false, amount: 0.18 }}
+          viewport={{ once: true, amount: 0.15 }}
         >
-          <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
+          <motion.div
+            variants={{ hidden: {}, show: {} }}
+            className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end"
+          >
             <div>
               <motion.p
                 variants={titleFromLeft}
                 className="text-xs uppercase tracking-[0.32em] text-gray-400"
               >
-                Builds 
+                Builds
               </motion.p>
 
               <motion.h2
                 variants={titleFromLeft}
-                className={`${raleway.className} mt-5 text-5xl font-extrabold uppercase italic tracking-tight text-black md:text-7xl lg:text-[6.5rem] leading-[0.95]`}
+                className={`${pixelify.className} mt-5 max-w-full rotate-[-1.5deg] text-[clamp(1.5rem,6vw,3.6rem)] font-bold uppercase leading-[1.08] tracking-wide`}
+                style={pixel3dStyle}
               >
-                Projects 
-                <br />
-               & Works
+                <SplitTextHover className="block">
+                  Projects
+                  <br />
+                  & Works
+                </SplitTextHover>
               </motion.h2>
             </div>
 
             <motion.div variants={fadeUp} className="md:pb-3">
-              <p className="max-w-md text-sm leading-7 text-gray-600 md:text-base">
+              <p className="max-w-md text-sm leading-[1.85] text-neutral-900 md:text-base">
                 A collection of projects where I build clean interfaces,
                 reliable backends, and scalable systems focused on real-world
                 usability.
               </p>
 
               <div className="mt-8 flex items-center gap-3 text-gray-700">
+                <span className="inline-block h-2 w-2 shrink-0 bg-[#B9FF66]" />
                 <span className="text-xs uppercase tracking-[0.28em]">
                   Click to explore
                 </span>
               </div>
             </motion.div>
-          </div>
+          </motion.div>
 
           <motion.div
             variants={fadeUp}
-            className="mt-12 h-px origin-left bg-gradient-to-r from-black via-gray-400 to-transparent"
+            className="mt-12 h-px origin-left bg-gray-900"
           />
 
           <motion.div
@@ -132,47 +227,13 @@ export default function Projects() {
             variants={cardsContainer}
           >
             {projects.map((project, index) => (
-              <motion.article
+              <ProjectCard
                 key={project.id}
+                project={project}
+                index={index}
                 variants={cardReveal}
-                onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer overflow-hidden rounded-2xl border border-black/8 bg-white shadow-[0_6px_25px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_10px_35px_rgba(0,0,0,0.08)]"
-              >
-                <div className="relative h-48 overflow-hidden bg-gray-100">
-                  <img
-                    src={project.images[0]}
-                    alt={project.title}
-                    className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-black/0 transition-all duration-300 group-hover:bg-black/10" />
-                </div>
-
-                <div className="flex flex-1 flex-col p-4 md:p-5">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400">
-                      {project.category}
-                    </p>
-
-                    <div className="flex items-center justify-between gap-4">
-                      <h3 className="text-2xl font-semibold tracking-tight text-black">
-                        {project.title}
-                      </h3>
-
-                      <span className="shrink-0 text-xs uppercase tracking-[0.24em] text-gray-400">
-                        0{index + 1}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="pt-6 flex items-center gap-2 text-sm font-medium text-gray-800">
-                    <span>View Project</span>
-                    <ArrowUpRight
-                      size={16}
-                      className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                    />
-                  </div>
-                </div>
-              </motion.article>
+                onSelect={setSelectedProject}
+              />
             ))}
           </motion.div>
         </motion.div>
@@ -182,7 +243,7 @@ export default function Projects() {
         {selectedProject && (
           <>
             <motion.div
-              className="fixed inset-0 z-40 bg-black/55 backdrop-blur-[6px]"
+              className="fixed inset-0 z-40 bg-black/55"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -195,27 +256,32 @@ export default function Projects() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 20 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
+              onClick={() => setSelectedProject(null)}
             >
               <div
-                className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden rounded-[1.75rem] border border-black/8 bg-[#FCFAF5] shadow-[0_25px_80px_rgba(0,0,0,0.22)] md:flex-row"
+                className="relative flex max-h-[92vh] w-full max-w-5xl flex-col overflow-hidden border-2 border-gray-900 bg-white shadow-[6px_6px_0_0_#111] md:flex-row"
                 onClick={(e) => e.stopPropagation()}
               >
                 <button
                   onClick={() => setSelectedProject(null)}
                   aria-label="Close project details"
-                  className="absolute right-3 top-3 z-20 rounded-full border border-black/10 bg-white/90 p-2.5 text-gray-700 shadow-sm backdrop-blur-md transition hover:border-black/20 hover:bg-white hover:text-black sm:right-4 sm:top-4"
+                  className="absolute right-3 top-3 z-20 border-2 border-gray-900 bg-[#B9FF66] p-2 text-gray-900 shadow-[2px_2px_0_0_#111] transition-[transform,box-shadow] duration-150 hover:translate-x-[1px] hover:translate-y-[1px] hover:shadow-[1px_1px_0_0_#111] sm:right-4 sm:top-4"
                 >
                   <X size={18} />
                 </button>
 
-                <div className="relative flex shrink-0 items-center justify-center overflow-hidden border-b border-black/5 bg-gradient-to-br from-[#F3EFE4] via-[#F8F6F1] to-[#EDE8D5] p-4 sm:p-5 md:w-[54%] md:border-b-0 md:border-r md:p-7">
-                  <div className="pointer-events-none absolute -left-10 top-8 h-40 w-40 rounded-full bg-white/50 blur-3xl" />
-                  <div className="pointer-events-none absolute -right-8 bottom-6 h-36 w-36 rounded-full bg-[#E8E0CF]/70 blur-3xl" />
-
-                  <div className="relative w-full overflow-hidden rounded-2xl border border-black/6 bg-white shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
-                    <img
+                <div className="relative flex shrink-0 items-center justify-center overflow-hidden border-b-2 border-gray-900 bg-white p-4 sm:p-5 md:w-[54%] md:border-b-0 md:border-r-2 md:p-7">
+                  <span
+                    className="absolute top-3 left-3 h-2 w-2 bg-[#B9FF66]"
+                    aria-hidden="true"
+                  />
+                  <div className="relative w-full overflow-hidden border-2 border-gray-900 bg-white">
+                    <Image
                       src={selectedProject.images[0]}
                       alt={selectedProject.title}
+                      width={1366}
+                      height={768}
+                      sizes="(max-width: 768px) 92vw, 552px"
                       className="mx-auto block h-auto max-h-[38vh] w-full object-contain object-top md:max-h-[78vh]"
                     />
                   </div>
@@ -227,32 +293,30 @@ export default function Projects() {
                       {selectedProject.category}
                     </p>
 
-                    <h3
-                      className={`${raleway.className} mt-4 text-3xl font-extrabold italic tracking-tight text-black sm:text-4xl`}
-                    >
+                    <h3 className="mt-4 text-3xl font-extrabold tracking-tight text-black sm:text-4xl">
                       {selectedProject.title}
                     </h3>
 
-                    <div className="mt-6 h-px w-12 bg-black/20" />
+                    <div className="mt-6 h-px w-12 bg-gray-900" />
 
-                    <p className="mt-6 max-w-md text-sm leading-7 text-gray-600 sm:text-[15px] sm:leading-8">
+                    <p className="mt-6 max-w-md text-sm leading-7 text-neutral-900 sm:text-[15px] sm:leading-8">
                       {selectedProject.fullDescription}
                     </p>
                   </div>
 
-                  <div className="mt-10 flex flex-wrap gap-3 border-t border-black/6 pt-8">
+                  <div className="mt-10 flex flex-wrap gap-3 border-t-2 border-gray-300 pt-8">
                     {selectedProject.live && (
                       <a
                         href={selectedProject.live}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-black px-6 py-3 text-sm font-medium text-white transition duration-300 hover:scale-[1.02]"
+                        className={ctaClass}
+                        {...livePreviewRoll.hoverProps}
                       >
-                        <span>Live Preview</span>
-                        <ArrowUpRight
-                          size={16}
-                          className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                        />
+                        <SplitTextHover unit active={livePreviewRoll.active}>
+                          Live Preview
+                        </SplitTextHover>
+                        <ArrowUpRight size={16} />
                       </a>
                     )}
 
@@ -261,10 +325,13 @@ export default function Projects() {
                         href={selectedProject.github}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 rounded-full border border-black/15 bg-[#FCFAF5] px-6 py-3 text-sm font-medium text-gray-800 transition duration-300 hover:border-black hover:bg-black hover:text-white"
+                        className="inline-flex items-center gap-2 border-2 border-gray-900 bg-white px-5 py-2 text-sm uppercase tracking-[0.18em] text-gray-900 shadow-[3px_3px_0_0_#111] transition-[transform,box-shadow] duration-150 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[1px_1px_0_0_#111]"
+                        {...githubRoll.hoverProps}
                       >
                         <Github size={16} />
-                        <span>GitHub</span>
+                        <SplitTextHover unit active={githubRoll.active}>
+                          GitHub
+                        </SplitTextHover>
                       </a>
                     )}
                   </div>
