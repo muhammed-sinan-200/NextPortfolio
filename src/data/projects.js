@@ -36,9 +36,9 @@ export const projects = [
     title: "Travel Holidays",
     category: "Freelance Project",
     fullDescription:
-      "Aiman Holidays is a responsive travel agency website developed for a client to showcase their services and business online with a clean, professional, and user-friendly interface.",
-    images: ["/travels.png"],
-    live: "https://aiman-holidays.vercel.app/",
+      "Travel Holidays is a responsive travel agency website developed for a client to showcase their services and business online with a clean, professional, and user-friendly interface.",
+    images: ["/travels.webp"],
+    live: "https://travel-holidays.vercel.app/",
     github: null,
   },
 
