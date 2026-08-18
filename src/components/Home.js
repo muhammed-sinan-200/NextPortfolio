@@ -84,7 +84,7 @@ export default function Home() {
               </SplitTextHover>
             </h1>
 
-            <p className="intro-fade intro-fade-delay-1 mt-8 max-w-xl text-sm leading-[1.85] text-neutral-900 md:text-base">
+            <p className="mt-8 max-w-xl text-sm leading-[1.85] text-neutral-900 md:text-base">
               I design and build modern web applications with clean
               interfaces, scalable backend systems, and smooth user
               experiences focused on real-world usability.

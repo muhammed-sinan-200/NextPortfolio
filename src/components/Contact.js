@@ -109,7 +109,7 @@ export default function Contact() {
         >
           <div className="grid gap-10 md:grid-cols-[1.2fr_0.8fr] md:items-end">
             <div>
-              <p className="text-xs uppercase tracking-[0.28em] text-gray-400">
+              <p className="text-xs uppercase tracking-[0.28em] text-gray-600">
                 Contact
               </p>
 
@@ -155,6 +155,7 @@ export default function Contact() {
                     <a
                       key={item.name}
                       href={item.href}
+                      aria-label={item.name}
                       target={item.href.startsWith("http") ? "_blank" : undefined}
                       rel={
                         item.href.startsWith("http")

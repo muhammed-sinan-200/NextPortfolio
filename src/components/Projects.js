@@ -99,7 +99,7 @@ function ProjectCard({ project, index, variants, onSelect }) {
 
       <div className="flex flex-1 flex-col p-4 md:p-5">
         <div className="flex flex-col gap-2">
-          <p className="text-[11px] uppercase tracking-[0.28em] text-gray-400">
+          <p className="text-[11px] uppercase tracking-[0.28em] text-gray-600">
             {project.category}
           </p>
 
@@ -183,7 +183,7 @@ export default function Projects() {
             <div>
               <motion.p
                 variants={titleFromLeft}
-                className="text-xs uppercase tracking-[0.32em] text-gray-400"
+                className="text-xs uppercase tracking-[0.32em] text-gray-600"
               >
                 Builds
               </motion.p>
@@ -289,7 +289,7 @@ export default function Projects() {
 
                 <div className="flex min-h-0 flex-1 flex-col overflow-y-auto bg-white px-7 py-8 sm:px-9 sm:py-10 md:px-10 md:py-12">
                   <div className="flex-1">
-                    <p className="text-[11px] uppercase tracking-[0.32em] text-gray-400">
+                    <p className="text-[11px] uppercase tracking-[0.32em] text-gray-600">
                       {selectedProject.category}
                     </p>
 

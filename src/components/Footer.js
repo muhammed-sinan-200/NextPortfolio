@@ -85,7 +85,7 @@ export default function Footer() {
           </p>
         </div>
         <div>
-          <h3 className="text-sm uppercase tracking-[0.24em] text-gray-400">
+          <h3 className="text-sm uppercase tracking-[0.24em] text-gray-600">
             Quick Links
           </h3>
           <div className="mt-5 flex flex-col gap-3">
@@ -102,7 +102,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <h3 className="text-sm uppercase tracking-[0.24em] text-gray-400">
+          <h3 className="text-sm uppercase tracking-[0.24em] text-gray-600">
             Find me on
           </h3>
 
@@ -114,6 +114,7 @@ export default function Footer() {
                 <a
                   key={item.name}
                   href={item.href}
+                  aria-label={item.name}
                   target={item.href.startsWith("http") ? "_blank" : undefined}
                   rel={
                     item.href.startsWith("http")

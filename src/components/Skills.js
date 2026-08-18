@@ -150,7 +150,7 @@ export default function Skills() {
             <div>
               <motion.p
                 variants={labelReveal}
-                className="text-xs uppercase tracking-[0.32em] text-gray-400"
+                className="text-xs uppercase tracking-[0.32em] text-gray-600"
               >
                 Technical Expertise
               </motion.p>
